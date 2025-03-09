@@ -1,0 +1,17 @@
+[project]
+name = "message-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "adrf>=0.1.9",
+    "cryptography>=44.0.2",
+    "django>=5.1.6",
+    "django-admin>=2.0.2",
+    "django-cors-headers>=4.7.0",
+    "pymysql>=1.1.1",
+]
+
+[tool.uv.workspace]
+members = ["Message-API"]
