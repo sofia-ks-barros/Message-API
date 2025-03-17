@@ -3,10 +3,11 @@ from django.shortcuts import render
 from django.http.response import JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework import status
-
+from rest_framework.permissions import IsAuthenticated
 from messages.models import Message
 from messages.serializers import MessageSerializer
 from adrf.decorators import api_view
+from rest_framework.decorators import permission_classes
 # Create your views here.
 
 def method_get_list(*ignore):
@@ -33,10 +34,12 @@ methods_list={"GET": method_get_list,
         }
 
 @api_view(["GET", "POST", "DELETE"])
+@permission_classes([IsAuthenticated])
 def message_list(request):
     return methods_list[request.method](request)
 
 @api_view(["GET", "POST", "DELETE"])
+@permission_classes([IsAuthenticated])
 def message_detail(request, pk):
     try:
         tutorial = Message.objects.get(pk=pk)
