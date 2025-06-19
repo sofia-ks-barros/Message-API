@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from messages.models import Message, User, Chat
+from MessagesApp.models import Message, User, Chat
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -14,8 +14,7 @@ class MessageSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ("id",
-                  "username",
+        fields = ("username",
                   "password",
                   "created_date",
                   "display_name"

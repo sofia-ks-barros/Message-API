@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-@e!%*(^4g@y5_2jby#6+@db8&me^seh^72c4!#de7v^809zu3n'
+SECRET_KEY = os.environ.get("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["nerdsystem.me"]
+ALLOWED_HOSTS = ["nerdsystem.me", "localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -39,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    'messages.apps.MessagesConfig',
+    'MessagesApp.apps.MessagesConfig',
     'corsheaders',
     'adrf',
 ]
@@ -56,6 +59,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
 ]
 
 ROOT_URLCONF = 'messageApi.urls'
@@ -74,6 +79,7 @@ TEMPLATES = [
             ],
         },
     },
+    
 ]
 
 WSGI_APPLICATION = 'messageApi.wsgi.application'
@@ -88,7 +94,7 @@ DATABASES = {
         'NAME': 'testdb',
         'USER': 'root',
         'PASSWORD': 'example',
-        'HOST': 'nerdsystem.me',
+        'HOST': 'localhost',
         'PORT': '3306',
     }
 }
